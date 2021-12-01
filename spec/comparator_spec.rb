@@ -21,7 +21,7 @@ RSpec.describe Comparator do
   end
 end
 
-RSpec.describe SecondComparator do
+RSpec.describe Comparator do
   it 'succeeds' do
     readings = [
       199, #  A
@@ -37,7 +37,10 @@ RSpec.describe SecondComparator do
     ].map { |raw_reading|
       DepthReading.new(raw_reading)
     }
-    counter = SecondComparator.new(readings).compare
+
+
+    grouped_readings = GroupReadings.new(readings).by(3)
+    counter = Comparator.new(grouped_readings).compare
     expect(counter.count).to eq(5)
   end
 end
