@@ -14,7 +14,9 @@ RSpec.describe Submarine do
 
   it 'succeeds' do
     submarine = Submarine.new
-    submarine.follow_instructions(input)
+    plan = Plan.new(input)
+    submarine.load_plan(plan)
+    submarine.move_according_to_plan
     expect(submarine.position).to eq(150)
   end
 end

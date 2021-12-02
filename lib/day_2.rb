@@ -1,46 +1,13 @@
-class Coordinates
-  def initialize(x=0, y=0)
-    @x = x
-    @y = y
-  end
+require_relative "day_2/plan"
+require_relative "day_2/submarine"
 
-  def add_x(x)
-    @x += x
-  end
+plan_path = File.join(File.dirname(__FILE__), "day_2/input.txt")
+raw_plan = File.readlines(plan_path)
 
-  def add_y(y)
-    @y += y
-  end
+plan = Plan.new(raw_plan)
+submarine = Submarine.new
 
-  def subtract_y(y)
-    @y -= y
-  end
+submarine.load_plan(plan)
+submarine.move_according_to_plan
 
-  def position
-    @x * @y
-  end
-end
-
-class Submarine
-  def initialize
-    @coordinates = Coordinates.new
-  end
-
-  def follow_instructions(input)
-    input.each do |movement|
-      direction, step = movement.split(" ")
-      case direction
-      when "forward"
-        @coordinates.add_x step.to_i
-      when "up"
-        @coordinates.subtract_y step.to_i
-      when "down"
-        @coordinates.add_y step.to_i
-      end
-    end
-  end
-
-  def position
-    @coordinates.position
-  end
-end
+pp submarine.position
