@@ -1,7 +1,29 @@
+class Coordinates
+  def initialize(x=0, y=0)
+    @x = x
+    @y = y
+  end
+
+  def add_x(x)
+    @x += x
+  end
+
+  def add_y(y)
+    @y += y
+  end
+
+  def subtract_y(y)
+    @y -= y
+  end
+
+  def position
+    @x * @y
+  end
+end
+
 class Submarine
   def initialize
-    @x = 0
-    @y = 0
+    @coordinates = Coordinates.new
   end
 
   def follow_instructions(input)
@@ -9,16 +31,16 @@ class Submarine
       direction, step = movement.split(" ")
       case direction
       when "forward"
-        @x += step.to_i
+        @coordinates.add_x step.to_i
       when "up"
-        @y -= step.to_i
+        @coordinates.subtract_y step.to_i
       when "down"
-        @y += step.to_i
+        @coordinates.add_y step.to_i
       end
     end
   end
 
   def position
-    @x * @y
+    @coordinates.position
   end
 end
