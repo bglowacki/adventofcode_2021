@@ -1,8 +1,8 @@
 require_relative "coordinates"
 
 class Submarine
-  def initialize
-    @coordinates = Coordinates.new
+  def initialize(coordinates: Coordinates.new)
+    @coordinates = coordinates
   end
 
   def load_plan(plan)
